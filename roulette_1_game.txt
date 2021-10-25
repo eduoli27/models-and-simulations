@@ -1,0 +1,18 @@
+possible_outcomes = list(range(37)) #creates list of 37 possible outcomes
+L = len(possible_outcomes) - 1 #gives the length of all the numbers groupable into bets
+
+even = [k for k in possible_outcomes if not k %2] #lists all even outcomes
+even.pop(0) # gets rid of 0
+odd = [k for k in possible_outcomes if k %2] #lists all odd numbers
+first_half = possible_outcomes[1 : int(L/2) + 1]
+second_half = possible_outcomes[int(L/2) + 1 : L + 1]
+first_third = possible_outcomes[1 : int(L/3) + 1]
+second_third = possible_outcomes[int(L/3) + 1 : int(2*L/3) + 1]
+third_third = possible_outcomes[int(2*L/3) + 1 : L + 1]
+
+possible_bets = {"even": even, "odd": odd, 
+                 "first_half": first_half, "second_half": second_half,
+                 "first_third": first_third, "second_third": second_third, "third_third": third_third} 
+                #creates a dict with all possible bets
+#USE: possible_bets[key] => value
+print(type(possible_bets), possible_bets)
