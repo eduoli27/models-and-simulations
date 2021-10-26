@@ -1,3 +1,8 @@
+# 0 - IMPORT MODULES
+import random 
+
+# 1 - DEFINE BET GROUPS
+
 possible_outcomes = list(range(37)) #creates list of 37 possible outcomes
 L = len(possible_outcomes) - 1 #gives the length of all the numbers groupable into bets
 
@@ -15,4 +20,42 @@ possible_bets = {"even": even, "odd": odd,
                  "first_third": first_third, "second_third": second_third, "third_third": third_third} 
                 #creates a dict with all possible bets
 #USE: possible_bets[key] => value
-print(type(possible_bets), possible_bets)
+#print(type(possible_bets))
+#print(possible_bets)
+#print(type(possible_bets["even"]))
+
+# 2 - BET CHOICE AND AMOUNT
+
+INITIAL_AMOUNT = 100
+current_amount = INITIAL_AMOUNT
+
+bet_choice = input("type your bet choice:    ")
+while bet_choice not in possible_bets.keys():
+    print("nope, you cannot bet on that. Please type in one of these: even, odd, first_half, first_third, etc.")
+    bet_choice = input("type your bet choice:    ")
+if bet_choice == "even" or bet_choice == "odd" or bet_choice == "first_half" or bet_choice == "second_half" or bet_choice == "red" or bet_choice == "black":
+    compensation_factor = 2
+if bet_choice == "first_third" or bet_choice == "second_third" or bet_choice == "third_third":
+    compensation_factor = 3
+    
+bet_amount = int(input("how much money do you want to bet?    "))
+while bet_amount > current_amount:
+    print("nope, you don't have that much money left...")
+    bet_amount = int(input("how much money do you want to bet?    "))
+    
+current_amount -= bet_amount
+    
+# 3 - ONE GAME RESULTS
+
+outcome = random.choice(possible_outcomes)
+print("the outcome is:")
+print(outcome)
+
+if outcome in possible_bets[bet_choice]:
+    print("you won!")
+    current_amount += bet_amount * compensation_factor
+else:
+    print("you lost...")
+    
+print("your current amount is:")
+print(current_amount)
